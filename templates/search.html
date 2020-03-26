@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+	load_tweets("tweet-container")
+});
+</script>
+{% endblock script %}
+
+
+{% block content %}
+    <div class = "row justify-content-sm-center">
+    	<div class = "col-sm-12">
+    		{% if request.GET.q %}
+    		<p class="search-heading">Request for {{ request.GET.q }}</p>
+    		<hr/>
+    		{% endif %}
+    	</div>
+
+		<div class = "col-sm-9">
+			<h1>Tweets</h1>
+			<hr/>
+
+			<div id="tweet-container" data_url="{% url 'search-api' %}">
+	
+			</div>
+
+			<a id="load-more" href="#">Load More</a><br/><br/>
+		</div>
+		<div class = "col-sm-3 col-xs-12" style = "color:teal;">
+			<h1>User</h1>
+			<hr/>
+			{% for user in users %}
+				<a href='/{{ user.username }}/'>{{ user.username }}</a><br/>
+			{% empty %}
+				<p>No users found</p>
+			{% endfor %}
+		</div>
+			<!--
+			{% for object in object_list %}
+				<div class="media">
+					<div class="media-body">
+						{{ object.content }}<br/>
+						via	{{ object.user }} |  {{ object.timestamp }} | <a href="{{ object.get_absolute_url}}">View</a></br>
+						{{ object.timestamp|timesince }} ago
+					</div>
+				</div>
+				<hr/>
+			{% empty %}
+				{% if request.GET.q %}
+					<p>No tweets found.</p>
+				{% else %}
+					<p>No tweets yet.</p>
+				{% endif %}
+			{% endfor %}
+			
+			Date : {{ now|date }}<br/>
+			Time : {{ now|time }}<br/>
+		-->
+		</div>
+	</div>
+{% endblock content%}
+
+<!-- 
+
+
+
+
+	{% for object in object_list %}
+	<div class = "row justify-content-sm-center">
+		<div class = "col-sm-3 col-xs-12" style = "background-color:teal;">
+			<h1>{{ object.user }}</h1>
+	    </div>
+		<div class = "col-sm-9">
+			{{ object.content }}<br/>
+			via	{{ object.user }} |  {{ object.timestamp }} | <a href="{{ object.get_absolute_url}}">View</a></br>
+			{{ object.timestamp|timesince }} ago
+		</div>
+		<div class = "col-sm-12">
+			<hr/>
+		</div>
+	</div>
+	{% empty %}
+		{% if request.GET.q %}
+			<p>No tweets found.</p>
+		{% else %}
+			<p>No tweets yet.</p>
+		{% endif %}
+	{% endfor %}
+	Date : {{ now|date }}<br/>
+	Time : {{ now|time }}<br/>
+
+-->

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% load recommended %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+	load_tweets("tweet-container")
+});
+</script>
+{% endblock script %}
+
+
+{% block content %}
+    <div class = "row justify-content-sm-center">
+		<div class = "col-sm-4 col-xs-12">
+				<h1 style = "color:teal;">{{ request.user }}</h1><br/>
+				<hr/>
+				<h3>Recommended</h3>
+				{% recommended request.user %}
+		</div>
+		<div class = "col-sm-8">
+			{% if not request.GET.q %}
+			<div class="">
+				{% include "tweets/form.html" with action_url=create_url form=create_form btn_title="Tweet" form_class="tweet-form" %}
+			</div>
+		    <hr/>
+			{% endif %}
+
+			<div id="tweet-container" data_url="{% url 'tweets-api:list' %}">
+	
+			</div>
+
+			<a id="load-more" href="#">Load More</a><br/><br/>
+			<!--
+			{% for object in object_list %}
+				<div class="media">
+					<div class="media-body">
+						{{ object.content }}<br/>
+						via	{{ object.user }} |  {{ object.timestamp }} | <a href="{{ object.get_absolute_url}}">View</a></br>
+						{{ object.timestamp|timesince }} ago
+					</div>
+				</div>
+				<hr/>
+			{% empty %}
+				{% if request.GET.q %}
+					<p>No tweets found.</p>
+				{% else %}
+					<p>No tweets yet.</p>
+				{% endif %}
+			{% endfor %}
+			
+			Date : {{ now|date }}<br/>
+			Time : {{ now|time }}<br/>
+		-->
+		</div>
+	</div>
+{% endblock content%}
+
+<!-- 
+
+
+
+
+	{% for object in object_list %}
+	<div class = "row justify-content-sm-center">
+		<div class = "col-sm-3 col-xs-12" style = "background-color:teal;">
+			<h1>{{ object.user }}</h1>
+	    </div>
+		<div class = "col-sm-9">
+			{{ object.content }}<br/>
+			via	{{ object.user }} |  {{ object.timestamp }} | <a href="{{ object.get_absolute_url}}">View</a></br>
+			{{ object.timestamp|timesince }} ago
+		</div>
+		<div class = "col-sm-12">
+			<hr/>
+		</div>
+	</div>
+	{% empty %}
+		{% if request.GET.q %}
+			<p>No tweets found.</p>
+		{% else %}
+			<p>No tweets yet.</p>
+		{% endif %}
+	{% endfor %}
+	Date : {{ now|date }}<br/>
+	Time : {{ now|time }}<br/>
+
+-->

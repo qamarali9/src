@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+	load_tweets("tweet-container")
+});
+</script>
+{% endblock script %}
+
+
+{% block content %}
+    <div class = "row justify-content-sm-center">
+		<div class = "col-sm-4 col-xs-12" style = "color:maroon;">
+				<h1>{{ obj.tag }}</h1>
+		</div>
+		<div class = "col-sm-8">
+
+			<h1>Tweets</h1>
+			<hr/>
+
+			<div id="tweet-container" data_url="{% url 'hashtags-api:detail' obj.tag%}">
+	
+			</div>
+
+			<a id="load-more" href="#">Load More</a><br/><br/>
+		</div>
+	</div>
+{% endblock content%}

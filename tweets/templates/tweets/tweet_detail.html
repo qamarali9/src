@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+	load_tweets("tweet-container", {{ object.id }})
+});
+</script>
+{% endblock script %}
+
+{% block content %}
+<div class="row justify-content-sm-center">
+	<div class = "col-sm-3 col-xs-12" style = "background-color:yellow;">
+		<h1>{{ object.user }}</h1>
+	</div>
+	<div class = "col-sm-9 col-xs-12">
+
+		<div id="tweet-container" data_url="{% url 'tweets-api:list' %}">
+	
+		</div>
+
+		<!-- {{ object.content }}<br/>
+		<br/>
+		{{ object.timestamp }}<br/>
+		{{ object.timestamp|timesince }} ago</br> -->
+	</div>
+	
+</div>
+{% endblock content %}
