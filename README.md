@@ -1,2 +1,2 @@
 # src
-Twitter-like app using Pythono/Django
+Twitter-like app using Python/Django
